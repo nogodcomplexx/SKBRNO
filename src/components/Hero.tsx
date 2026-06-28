@@ -5,6 +5,16 @@ import { ChevronDown, Star, Clock, MapPin, Sparkles, Scissors, Moon } from 'luci
 import SplitText from './animations/SplitText';
 import BlurText from './animations/BlurText';
 import FadeIn from './animations/FadeIn';
+import dynamic from 'next/dynamic';
+
+const BarberPole3D = dynamic(() => import('./BarberPole3D'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <span className="w-3.5 h-3.5 border border-[#D4AF37]/50 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+});
 
 export default function Hero() {
   const [currentTime, setCurrentTime] = useState('');
@@ -147,6 +157,16 @@ export default function Hero() {
 
         {/* Right Side: Cinematic Video / Photography Showcase */}
         <div className="lg:col-span-5 relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[24px] overflow-hidden border border-white/5 group shadow-2xl bg-[#121113]">
+          
+          {/* Floating 3D Barber Pole Widget */}
+          <div className="absolute -left-10 top-16 z-30 w-24 h-48 bg-[#080809]/80 backdrop-blur-md border border-white/5 hover:border-[#D4AF37]/35 rounded-[20px] p-2 shadow-[0_15px_35px_rgba(0,0,0,0.8),_0_0_20px_rgba(212,175,55,0.04)] hidden xl:flex flex-col items-center justify-between pointer-events-auto transition-all duration-500 group/pole hover:scale-105">
+            <div className="text-[8px] uppercase tracking-[0.2em] text-[#A1A1AA] font-bold mt-1">3D Live</div>
+            <div className="w-full h-32">
+              <BarberPole3D />
+            </div>
+            <div className="text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] font-bold mb-1 group-hover/pole:animate-pulse">Barber Pole</div>
+          </div>
+
           {/* Glassmorphism Title Overlay */}
           <div className="absolute top-6 left-6 z-20 px-4 py-2 rounded-full bg-[#080809]/60 backdrop-blur-md border border-white/5 flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />

@@ -1,0 +1,48 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 15.11.2017 07:54:43
+
+newmtl Barber_Shop_Pole_02
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Barber_Shop_Pole_02_Diffuse.png
+	map_Kd Barber_Shop_Pole_02_Diffuse.png
+	map_Ke Barber_Shop_Pole_02_Emissive.png
+	map_bump -bm 0.300000 Map__3_Normal_Bump.png
+
+newmtl Barber_Shop_Pole_02_Glass
+	Ns 10.000000
+	Ni 1.500000
+	d 0.058823
+	Tr 0.941177
+	Tf 0.058823 0.058823 0.058823 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Barber_Shop_Pole_02_Diffuse.png
+	map_Kd Barber_Shop_Pole_02_Diffuse.png
+	map_bump -bm 0.300000 Map__3_Normal_Bump.png
+
+newmtl Barber_Shop_Pole_02_Metal
+	Ns 10.000000
+	Ni 1.500000
+	d 1.000000
+	Tr 0.000000
+	Tf 1.000000 1.000000 1.000000 
+	illum 2
+	Ka 0.588000 0.588000 0.588000
+	Kd 0.500000 0.500000 0.500000
+	Ks 0.000000 0.000000 0.000000
+	Ke 0.000000 0.000000 0.000000
+	map_Ka Barber_Shop_Pole_02_Diffuse.png
+	map_Kd Barber_Shop_Pole_02_Diffuse.png
+	map_bump -bm 0.300000 Map__3_Normal_Bump.png
