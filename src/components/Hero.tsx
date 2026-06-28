@@ -77,9 +77,16 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#080809] pt-24 pb-12 lg:pb-8">
       {/* Background radial glow */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#D4AF37]/2.5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#C5A880]/2.5 blur-[120px]" />
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div 
+          className="absolute inset-0 opacity-70"
+          style={{
+            background: `
+              radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0) 60%),
+              radial-gradient(circle at 15% 85%, rgba(197, 168, 128, 0.04) 0%, rgba(197, 168, 128, 0) 60%)
+            `
+          }}
+        />
       </div>
 
       <div className="mx-auto max-w-7xl w-full px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto z-10">

@@ -196,7 +196,12 @@ export default function Navbar() {
               className="fixed inset-y-0 right-0 z-40 w-full md:w-[480px] bg-[#0C0B0D] border-l border-white/5 shadow-2xl flex flex-col justify-between p-12 md:p-16 pt-32"
             >
               {/* Background elements */}
-              <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#D4AF37]/2.5 blur-[100px] pointer-events-none" />
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-40" 
+                style={{
+                  background: 'radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%)'
+                }}
+              />
 
               <motion.div variants={navLinksVariants} className="flex flex-col gap-6 md:gap-8">
                 <span className="text-[10px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold border-b border-white/5 pb-2">Menu</span>
