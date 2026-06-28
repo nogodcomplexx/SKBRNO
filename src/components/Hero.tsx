@@ -82,6 +82,13 @@ export default function Hero() {
             <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed">
               Prémiové kadeřnictví v srdci Brna kombinující tradiční řemeslo s moderními trendy. Specializujeme se na precizní pánské střihy, špičkový styling a šetrnou dámskou péči. Přijďte kdykoliv bez objednání.
             </p>
+            {/* Social Proof Badge */}
+            <div className="flex items-center gap-2.5 mt-5 text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
+              <svg className="w-3.5 h-3.5 text-[#D4AF37] fill-current animate-pulse" viewBox="0 0 24 24">
+                <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" />
+              </svg>
+              <span>500+ spokojených zákazníků</span>
+            </div>
           </div>
 
           {/* CTA Buttons */}
@@ -192,8 +199,8 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 mt-1 hover:text-[#D4AF37] transition-colors group"
               >
-                <span className="text-sm font-bold text-white group-hover:text-[#D4AF37]">5.0/5 ★</span>
-                <span className="text-xs text-[#A1A1AA]">(125+ recenzí)</span>
+                <span className="text-sm font-bold text-white group-hover:text-[#D4AF37]">4.9/5 ★</span>
+                <span className="text-xs text-[#A1A1AA]">(135+ recenzí)</span>
               </a>
             </div>
           </div>

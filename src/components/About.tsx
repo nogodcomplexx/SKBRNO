@@ -30,7 +30,7 @@ function LaurelWreath({ year, type }: LaurelProps) {
     <div className="flex flex-col items-center justify-center shrink-0">
       <svg 
         viewBox="0 0 100 100" 
-        className={`w-14 h-14 sm:w-16 sm:h-16 ${textColor} transition-transform duration-500 hover:scale-110 filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.05)]`}
+        className={`w-20 h-20 sm:w-28 sm:h-28 ${textColor} transition-transform duration-500 hover:scale-110 filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.05)]`}
       >
         <g fill="currentColor">
           {branchPaths}
@@ -145,13 +145,13 @@ export default function About() {
                   href="https://www.orlovekrasy.cz/profile-542594-sk-kadernictvi-na-novobranske" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#D4AF37] font-semibold hover:underline"
+                  className="text-[#D4AF37] font-bold hover:text-white transition-colors duration-300 underline underline-offset-4 decoration-[#D4AF37]/50 hover:decoration-white"
                 >
                   Orlové Krásy (Orly kadeřnictví)
                 </a>{' '}
-                s prestižním oceněním Gold za roky 2024, 2025 a 2026.
+                s prestižním oceněním <strong className="font-bold text-[#D4AF37] text-gold-gradient-animated">Gold</strong> za roky 2024, 2025 a 2026.
               </p>
-              <div className="flex flex-wrap gap-x-5 gap-y-4 items-center justify-start">
+              <div className="flex flex-wrap gap-x-6 gap-y-5 items-center justify-start">
                 <LaurelWreath year="2026" type="LAUREÁT" />
                 <LaurelWreath year="2026" type="GOLD" />
                 <LaurelWreath year="2025" type="LAUREÁT" />
@@ -211,9 +211,20 @@ export default function About() {
               transition={{ delay: 0.4 }}
               className="absolute left-[8%] bottom-[8%] z-30 px-6 py-4 rounded-2xl bg-[#080809]/90 backdrop-blur-xl border border-[#D4AF37]/10 flex flex-col items-center justify-center shadow-2xl"
             >
-              <span className="text-3xl font-bold text-[#D4AF37] leading-none" style={{ fontFamily: 'var(--font-heading)' }}>5.0 ★</span>
-              <span className="text-[10px] text-[#FAFAF9] font-semibold mt-1.5">125+ 5★ recenzí</span>
+              <span className="text-3xl font-bold text-[#D4AF37] leading-none" style={{ fontFamily: 'var(--font-heading)' }}>4.9 ★</span>
+              <span className="text-[10px] text-[#FAFAF9] font-semibold mt-1.5">135+ recenzí</span>
               <span className="text-[8px] uppercase tracking-[0.15em] text-[#A1A1AA] mt-0.5">Google rating</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="absolute right-[4%] bottom-[6%] z-30 px-5 py-3.5 rounded-2xl bg-[#080809]/90 backdrop-blur-xl border border-[#D4AF37]/10 flex flex-col items-center justify-center shadow-2xl"
+            >
+              <span className="text-2xl font-bold text-[#D4AF37] leading-none" style={{ fontFamily: 'var(--font-heading)' }}>500+</span>
+              <span className="text-[9px] text-[#FAFAF9] font-bold mt-1.5 uppercase tracking-wider text-center leading-tight">Spokojených<br/>zákazníků</span>
             </motion.div>
           </div>
 

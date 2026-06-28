@@ -9,10 +9,12 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import MobileStickyBar from '@/components/MobileStickyBar';
+import Loader from '@/components/Loader';
 
 export default function Home() {
   return (
     <>
+      <Loader />
       <Navbar />
       <main>
         <Hero />

@@ -123,8 +123,8 @@ export default function RootLayout({
               ],
               aggregateRating: {
                 "@type": "AggregateRating",
-                ratingValue: "5.0",
-                reviewCount: "125",
+                ratingValue: "4.9",
+                reviewCount: "136",
               },
               priceRange: "200-2500 Kč",
               sameAs: [

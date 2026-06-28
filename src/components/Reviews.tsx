@@ -114,14 +114,14 @@ export default function Reviews() {
             >
               <GoogleGoldIcon />
               <div className="flex items-center gap-2">
-                <span className="text-[#FAFAF9] text-xl font-bold group-hover:text-[#D4AF37] transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>5.0 / 5.0</span>
+                <span className="text-[#FAFAF9] text-xl font-bold group-hover:text-[#D4AF37] transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>4.9 / 5.0</span>
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} size={14} className="text-[#D4AF37] fill-[#D4AF37]" />
                   ))}
                 </div>
               </div>
-              <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-semibold">125+ 5★ recenzí</span>
+              <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-semibold">135+ recenzí</span>
             </a>
               <p className="text-[10px] text-[#A1A1AA] mt-3 flex items-center justify-center gap-1.5">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
