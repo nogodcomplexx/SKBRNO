@@ -35,24 +35,35 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function Gallery() {
+  const [activeCategory, setActiveCategory] = useState<'all' | 'hair' | 'atelier'>('all');
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const visibleImages = useMemo(() => {
-    return isExpanded ? galleryImages : galleryImages.slice(0, INITIAL_LIMIT);
-  }, [isExpanded]);
+  const filteredImages = useMemo(() => {
+    if (activeCategory === 'all') return galleryImages;
+    if (activeCategory === 'hair') return galleryImages.filter(img => img.category === 'barber' || img.category === 'color');
+    if (activeCategory === 'atelier') return galleryImages.filter(img => img.category === 'atelier');
+    return galleryImages;
+  }, [activeCategory]);
 
-  const openLightbox = (index: number) => setSelectedIndex(index);
+  const visibleImages = useMemo(() => {
+    return isExpanded ? filteredImages : filteredImages.slice(0, INITIAL_LIMIT);
+  }, [isExpanded, filteredImages]);
+
+  const openLightbox = (imgSrc: string) => {
+    const idx = filteredImages.findIndex(img => img.src === imgSrc);
+    if (idx !== -1) setSelectedIndex(idx);
+  };
   const closeLightbox = () => setSelectedIndex(null);
 
   const goNext = () => {
     if (selectedIndex === null) return;
-    setSelectedIndex((selectedIndex + 1) % galleryImages.length);
+    setSelectedIndex((selectedIndex + 1) % filteredImages.length);
   };
 
   const goPrev = () => {
     if (selectedIndex === null) return;
-    setSelectedIndex((selectedIndex - 1 + galleryImages.length) % galleryImages.length);
+    setSelectedIndex((selectedIndex - 1 + filteredImages.length) % filteredImages.length);
   };
 
   return (
@@ -90,6 +101,32 @@ export default function Gallery() {
           </FadeIn>
         </div>
 
+        {/* Category Filters */}
+        <FadeIn delay={0.2}>
+          <div className="flex justify-start md:justify-center gap-3 mb-10 overflow-x-auto scrollbar-hide">
+            {(['all', 'hair', 'atelier'] as const).map((category) => {
+              const label = category === 'all' ? 'Všechny' : category === 'hair' ? 'Vlasy & Styling' : 'Ateliér';
+              const isActive = activeCategory === category;
+              return (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setIsExpanded(false); // Reset expansion on category change
+                  }}
+                  className={`px-6 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold border transition-all duration-300 ${
+                    isActive
+                      ? 'bg-[#D4AF37] border-[#D4AF37] text-[#080809] font-bold'
+                      : 'bg-[#080809] border-white/5 text-[#A1A1AA] hover:text-white hover:border-white/10'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </FadeIn>
+
         {/* Lookbook Asymmetric Grid Container */}
         <div className="relative">
           <motion.div
@@ -119,7 +156,7 @@ export default function Gallery() {
                     className={gridClasses}
                   >
                     <div
-                      onClick={() => openLightbox(i)}
+                      onClick={() => openLightbox(img.src)}
                       className="relative w-full h-full rounded-2xl overflow-hidden cursor-pointer border border-white/5 group bg-[#121113] hover:border-[#D4AF37]/30 transition-all duration-500 shadow-lg hover:shadow-[0_20px_50px_rgba(212,175,55,0.06)]"
                     >
                       {/* Image */}
@@ -205,7 +242,7 @@ export default function Gallery() {
 
       {/* Lightbox / Fullscreen Viewer */}
       <AnimatePresence>
-        {selectedIndex !== null && (
+        {selectedIndex !== null && filteredImages.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -216,8 +253,8 @@ export default function Gallery() {
             {/* Top Bar */}
             <div className="flex items-center justify-between w-full z-10 max-w-7xl mx-auto">
               <span className="text-[10px] tracking-[0.3em] text-[#C5A880] uppercase font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
-                <span className="font-serif italic text-white text-base mr-1">0{selectedIndex + 1}</span> / 0{galleryImages.length}
-                <span className="text-[#A1A1AA] ml-3 hidden sm:inline">• {categoryLabels[galleryImages[selectedIndex].category]}</span>
+                <span className="font-serif italic text-white text-base mr-1">0{selectedIndex + 1}</span> / 0{filteredImages.length}
+                <span className="text-[#A1A1AA] ml-3 hidden sm:inline">• {categoryLabels[filteredImages[selectedIndex].category]}</span>
               </span>
               <button
                 onClick={closeLightbox}
@@ -248,8 +285,8 @@ export default function Gallery() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src={galleryImages[selectedIndex].src}
-                  alt={galleryImages[selectedIndex].alt}
+                  src={filteredImages[selectedIndex].src}
+                  alt={filteredImages[selectedIndex].alt}
                   className="max-w-full max-h-full object-contain"
                 />
               </motion.div>
@@ -270,7 +307,7 @@ export default function Gallery() {
                   SK LOOKBOOK
                 </p>
                 <p className="text-[9px] text-[#C5A880] uppercase tracking-[0.2em] font-bold">
-                  SK Kadeřnictví Brno • {categoryLabels[galleryImages[selectedIndex].category]}
+                  SK Kadeřnictví Brno • {categoryLabels[filteredImages[selectedIndex].category]}
                 </p>
               </div>
 
@@ -279,7 +316,7 @@ export default function Gallery() {
                 className="flex items-center gap-2.5 overflow-x-auto max-w-full py-2 px-6 justify-start md:justify-center custom-scrollbar"
                 onClick={(e) => e.stopPropagation()}
               >
-                {galleryImages.map((img, idx) => (
+                {filteredImages.map((img, idx) => (
                   <button
                     key={img.src}
                     onClick={() => setSelectedIndex(idx)}

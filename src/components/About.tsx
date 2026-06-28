@@ -1,8 +1,9 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles, Scissors, Heart, Shield } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import FadeIn from './animations/FadeIn';
+import { ScissorsAndComb, StraightRazor, DropperBottle } from './CustomIcons';
 
 interface LaurelProps {
   year: string;
@@ -113,7 +114,7 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/5">
               <FadeIn delay={0.4} className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <Scissors size={16} />
+                  <ScissorsAndComb size={16} />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Preciznost</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Každý střih ladíme k dokonalosti podle anatomie vaší hlavy.</span>
@@ -121,7 +122,7 @@ export default function About() {
               
               <FadeIn delay={0.5} className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <Heart size={16} />
+                  <StraightRazor size={16} />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Vášeň</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Sledujeme světové trendy, abychom přinesli to nejlepší.</span>
@@ -129,7 +130,7 @@ export default function About() {
 
               <FadeIn delay={0.6} className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <Shield size={16} />
+                  <DropperBottle size={16} />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Kvalita</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Používáme špičkovou kosmetiku pro zdravé a lesklé vlasy.</span>

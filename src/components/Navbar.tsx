@@ -81,28 +81,28 @@ export default function Navbar() {
         <motion.div
           layout
           transition={{ type: 'spring', stiffness: 220, damping: 28 }}
-          className={`pointer-events-auto flex items-center justify-between bg-[#080809]/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-500 rounded-full ${
+          className={`pointer-events-auto flex items-center justify-between bg-[#080809]/40 backdrop-blur-2xl border border-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.7),_0_0_20px_rgba(212,175,55,0.05)] transition-all duration-500 rounded-full ${
             isScrolled
-              ? 'w-full max-w-[480px] px-5 py-2.5 border-[#D4AF37]/20 shadow-[0_10px_30px_rgba(212,175,55,0.06)]'
+              ? 'w-full max-w-[480px] lg:max-w-5xl px-5 lg:px-6 py-2.5 lg:py-3.5 border-[#D4AF37]/20 lg:border-white/10'
               : 'w-full max-w-5xl px-6 py-4'
           }`}
         >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 shrink-0">
             <div className="relative flex items-center gap-2 group">
-              <Logo size={isScrolled ? 34 : 40} className="transition-all duration-500 group-hover:scale-105" />
+              <Logo size={isScrolled ? 36 : 40} className="transition-all duration-500 group-hover:scale-105" />
               <div className="flex flex-col">
                 <span className="text-[#FAFAF9] text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase leading-none" style={{ fontFamily: 'var(--font-heading)' }}>SK STUDIO</span>
-                {!isScrolled && (
-                  <span className="text-[#A1A1AA] text-[9px] tracking-[0.1em] uppercase mt-0.5">Kadeřnictví Brno</span>
-                )}
+                <span className={`text-[#A1A1AA] text-[9px] tracking-[0.1em] uppercase mt-0.5 ${isScrolled ? 'hidden lg:block' : 'block'}`}>
+                  Kadeřnictví Brno
+                </span>
               </div>
             </div>
           </a>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1 overflow-hidden transition-all duration-500">
-            {!isScrolled && !isOpen && navLinks.map((link) => (
+            {!isOpen && navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -120,15 +120,32 @@ export default function Navbar() {
             {!isOpen && (
               <div className="transition-all duration-300">
                 {isScrolled ? (
-                  <Magnet strength={0.15}>
-                    <a
-                      href="tel:+420770114540"
-                      className="w-9 h-9 flex items-center justify-center border border-[#D4AF37]/25 hover:border-[#D4AF37] text-[#D4AF37] rounded-full bg-[#D4AF37]/5 transition-all duration-300 shadow-md hover:shadow-[0_0_15px_rgba(212,175,55,0.2)]"
-                      aria-label="Zavolat"
-                    >
-                      <Phone size={13} />
-                    </a>
-                  </Magnet>
+                  <div className="flex items-center">
+                    {/* Mobile/Tablet icon-only */}
+                    <div className="lg:hidden">
+                      <Magnet strength={0.15}>
+                        <a
+                          href="tel:+420770114540"
+                          className="w-9 h-9 flex items-center justify-center border border-[#D4AF37]/25 hover:border-[#D4AF37] text-[#D4AF37] rounded-full bg-[#D4AF37]/5 transition-all duration-300 shadow-md hover:shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+                          aria-label="Zavolat"
+                        >
+                          <Phone size={13} />
+                        </a>
+                      </Magnet>
+                    </div>
+                    {/* Desktop full button */}
+                    <div className="hidden lg:block">
+                      <Magnet strength={0.15}>
+                        <a
+                          href="tel:+420770114540"
+                          className="inline-flex items-center justify-center px-5 py-2.5 border border-white/10 hover:border-[#D4AF37] text-white rounded-full text-[10px] font-semibold uppercase tracking-widest transition-all duration-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] bg-white/[0.02]"
+                        >
+                          <Phone size={11} className="mr-2 text-[#D4AF37]" />
+                          +420 770 114 540
+                        </a>
+                      </Magnet>
+                    </div>
+                  </div>
                 ) : (
                   <div className="hidden sm:block">
                     <Magnet strength={0.15}>

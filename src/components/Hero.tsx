@@ -9,6 +9,34 @@ import FadeIn from './animations/FadeIn';
 export default function Hero() {
   const [currentTime, setCurrentTime] = useState('');
   const [salonStatus, setSalonStatus] = useState({ isOpen: false, text: 'Zavřeno' });
+  const [occupancy, setOccupancy] = useState<{ text: string; waitTime: string; percentage: number } | null>(null);
+  const [isScanning, setIsScanning] = useState(false);
+  const [scanComplete, setScanComplete] = useState(false);
+
+  const handleScan = () => {
+    setIsScanning(true);
+    setTimeout(() => {
+      setIsScanning(false);
+      setScanComplete(true);
+      
+      const pragueDate = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Prague" }));
+      const hour = pragueDate.getHours();
+      
+      if (!salonStatus.isOpen) {
+        setOccupancy({ text: 'Zavřeno', waitTime: 'Zavřeno', percentage: 0 });
+        return;
+      }
+      
+      const isPeak = (hour >= 11 && hour <= 13) || (hour >= 16 && hour <= 19);
+      if (isPeak) {
+        setOccupancy({ text: 'Vysoká obsazenost', waitTime: '20–30 min', percentage: 85 });
+      } else if (hour >= 9 && hour < 11) {
+        setOccupancy({ text: 'Nízká obsazenost', waitTime: '5–10 min', percentage: 20 });
+      } else {
+        setOccupancy({ text: 'Střední obsazenost', waitTime: '10–20 min', percentage: 50 });
+      }
+    }, 1500);
+  };
 
   useEffect(() => {
     const updateTimeAndStatus = () => {
@@ -165,19 +193,46 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Peak Hours Info */}
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-[#D4AF37]">
+          {/* Live Occupancy Estimator */}
+          <div className="flex items-start gap-4 col-span-1">
+            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-[#D4AF37] shrink-0">
               <Clock size={16} />
             </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A1A1AA]">Tip pro návštěvu</span>
-              <p className="text-sm font-semibold tracking-wide text-white mt-1">
-                Největší provoz bývá 11–13 a po 16. hodině
-              </p>
-              <p className="text-[10px] text-[#A1A1AA] mt-0.5">
-                Neváhejte zavolat a zeptat se
-              </p>
+            <div className="flex-1 min-h-[58px]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A1A1AA] block">Vytíženost & Čekací doba</span>
+              
+              {!scanComplete && !isScanning && (
+                <button
+                  onClick={handleScan}
+                  className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[#D4AF37]/20 hover:border-[#D4AF37] bg-[#D4AF37]/5 text-[9px] text-[#D4AF37] hover:text-[#080809] hover:bg-[#D4AF37] font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
+                >
+                  Zjistit aktuální stav
+                </button>
+              )}
+
+              {isScanning && (
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="w-3 h-3 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
+                  <span className="text-[9px] text-[#A1A1AA] uppercase tracking-wider font-semibold animate-pulse">Načítám studio...</span>
+                </div>
+              )}
+
+              {scanComplete && occupancy && (
+                <div className="mt-1.5 space-y-1.5 max-w-[220px]">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="font-semibold text-white text-[11px]">{occupancy.text}</span>
+                    <span className="text-[#D4AF37] font-bold text-[11px]">{occupancy.waitTime}</span>
+                  </div>
+                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-1000 ${
+                        occupancy.percentage > 70 ? 'bg-rose-500' : occupancy.percentage > 35 ? 'bg-[#D4AF37]' : 'bg-emerald-500'
+                      }`}
+                      style={{ width: `${occupancy.percentage}%` }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

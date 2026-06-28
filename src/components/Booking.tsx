@@ -1,8 +1,27 @@
 'use client';
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar as CalendarIcon, Clock, Scissors, Phone, User, Check, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Phone, User, Check, ArrowRight, ArrowLeft } from 'lucide-react';
 import FadeIn from './animations/FadeIn';
+import { ScissorsAndComb, StraightRazor, HairDryer, BeardAndMustache } from './CustomIcons';
+
+const getServiceIcon = (id: string) => {
+  switch (id) {
+    case '1': // Barber Střih & Mytí
+      return <ScissorsAndComb className="w-5 h-5" />;
+    case '2': // Komplet Střih & Vousy
+      return <StraightRazor className="w-5 h-5" />;
+    case '3': // Komplet Střední Vlasy
+    case '4': // Komplet Dlouhé Vlasy
+      return <HairDryer className="w-5 h-5" />;
+    case '5': // Úprava vousů
+      return <BeardAndMustache className="w-5 h-5" />;
+    case '6': // Dětský střih
+      return <ScissorsAndComb className="w-5 h-5" />;
+    default:
+      return <ScissorsAndComb className="w-5 h-5" />;
+  }
+};
 
 const services = [
   { id: '1', name: 'Barber Střih & Mytí', category: 'Pánské', price: '750 Kč' },
@@ -196,15 +215,24 @@ export default function Booking() {
                             <button
                               key={service.id}
                               onClick={() => setSelectedService(service)}
-                              className={`p-4 rounded-xl border text-left transition-all duration-300 flex justify-between items-center ${
+                              className={`p-4 rounded-xl border text-left transition-all duration-300 flex justify-between items-center group ${
                                 selectedService?.id === service.id
                                   ? 'bg-[#D4AF37]/5 border-[#D4AF37] text-white'
                                   : 'bg-white/[0.01] border-white/5 text-[#A1A1AA] hover:border-white/15 hover:text-white'
                               }`}
                             >
-                              <div>
-                                <span className="text-[9px] uppercase tracking-widest text-[#C5A880] block mb-1">{service.category}</span>
-                                <span className="text-sm font-semibold block">{service.name}</span>
+                              <div className="flex items-center gap-3">
+                                <div className={`p-2 rounded-lg border transition-colors duration-300 ${
+                                  selectedService?.id === service.id
+                                    ? 'bg-[#D4AF37]/10 border-[#D4AF37]/20 text-[#D4AF37]'
+                                    : 'bg-white/[0.02] border-white/5 text-[#A1A1AA] group-hover:text-white group-hover:border-white/10'
+                                }`}>
+                                  {getServiceIcon(service.id)}
+                                </div>
+                                <div>
+                                  <span className="text-[9px] uppercase tracking-widest text-[#C5A880] block mb-1">{service.category}</span>
+                                  <span className="text-sm font-semibold block">{service.name}</span>
+                                </div>
                               </div>
                               <span className="text-xs font-bold text-[#D4AF37]">{service.price}</span>
                             </button>
