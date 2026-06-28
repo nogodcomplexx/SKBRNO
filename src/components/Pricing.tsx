@@ -68,7 +68,7 @@ export default function Pricing() {
 
         {/* Minimalist Lookbook Tab Selector */}
         <FadeIn delay={0.2} className="w-full">
-          <div className="flex justify-start sm:justify-center border-b border-white/5 mb-16 w-full max-w-md mx-auto overflow-x-auto scrollbar-hide px-4 sm:px-0">
+          <div className="flex justify-start sm:justify-center border-b border-white/5 mb-16 w-full max-w-xl mx-auto overflow-x-auto scrollbar-hide px-4 sm:px-0">
             {tabs.map((tab) => (
               <button
                 key={tab}
