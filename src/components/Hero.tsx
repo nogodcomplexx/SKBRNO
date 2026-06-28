@@ -1,0 +1,204 @@
+'use client';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronDown, Star, Clock, MapPin, Sparkles } from 'lucide-react';
+import SplitText from './animations/SplitText';
+import BlurText from './animations/BlurText';
+import FadeIn from './animations/FadeIn';
+
+export default function Hero() {
+  const [currentTime, setCurrentTime] = useState('');
+  const [salonStatus, setSalonStatus] = useState({ isOpen: false, text: 'Zavřeno' });
+
+  useEffect(() => {
+    const updateTimeAndStatus = () => {
+      const pragueDate = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Prague" }));
+      
+      const hours = pragueDate.getHours().toString().padStart(2, '0');
+      const minutes = pragueDate.getMinutes().toString().padStart(2, '0');
+      setCurrentTime(`${hours}:${minutes}`);
+
+      const day = pragueDate.getDay();
+      const hour = pragueDate.getHours();
+      const min = pragueDate.getMinutes();
+      const timeDecimal = hour + min / 60;
+
+      let isOpen = false;
+      let statusText = 'Zavřeno';
+
+      if (day >= 2 && day <= 5) {
+        if (timeDecimal >= 9 && timeDecimal < 19) {
+          isOpen = true;
+          statusText = 'Otevřeno';
+        }
+      } else if (day === 6) {
+        if (timeDecimal >= 10 && timeDecimal < 18) {
+          isOpen = true;
+          statusText = 'Otevřeno';
+        }
+      }
+
+      setSalonStatus({ isOpen, text: statusText });
+    };
+
+    updateTimeAndStatus();
+    const interval = setInterval(updateTimeAndStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#080809] pt-24 pb-12 lg:pb-8">
+      {/* Background radial glow */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#D4AF37]/2.5 blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#C5A880]/2.5 blur-[120px]" />
+      </div>
+
+      <div className="mx-auto max-w-7xl w-full px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto z-10">
+        {/* Left Side: Editorial Typography & Content */}
+        <div className="lg:col-span-7 flex flex-col justify-center text-left">
+          {/* Studio Tagline */}
+          <FadeIn delay={0.1}>
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="h-[1px] w-8 bg-[#D4AF37]" />
+              <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-bold flex items-center gap-1.5">
+                <Sparkles size={12} className="text-[#D4AF37]" />
+                Brno-střed • Novobranská 16
+              </span>
+            </div>
+          </FadeIn>
+
+          {/* Heading with Serif / Italic styling */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#FAFAF9] leading-[1.05] tracking-tight mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
+            Střih, který vyjádří
+            <br />
+            <span className="font-serif italic text-transparent bg-clip-text bg-gradient-to-r from-[#C5A880] to-[#E6D5C3] font-normal pr-4">
+              vaši osobnost
+            </span>
+          </h1>
+
+          {/* Descriptive Copy */}
+          <div className="max-w-xl mb-10">
+            <p className="text-base sm:text-lg text-[#A1A1AA] leading-relaxed">
+              Prémiové kadeřnictví v srdci Brna kombinující tradiční řemeslo s moderními trendy. Specializujeme se na precizní pánské střihy, špičkový styling a šetrnou dámskou péči. Přijďte kdykoliv bez objednání.
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <FadeIn delay={0.3}>
+            <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+              <a
+                href="tel:+420770114540"
+                className="group relative px-8 py-5 bg-[#D4AF37] text-[#080809] rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-[#FAFAF9] transition-all duration-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] flex items-center justify-center gap-2"
+              >
+                Volat a přijít hned
+              </a>
+              <a
+                href="#cenik"
+                className="px-8 py-5 border border-white/10 hover:border-white/30 text-white rounded-full text-xs font-bold uppercase tracking-[0.2em] hover:bg-white/[0.03] transition-all duration-500 flex items-center justify-center"
+              >
+                Kompletní ceník
+              </a>
+            </div>
+          </FadeIn>
+        </div>
+
+        {/* Right Side: Cinematic Video / Photography Showcase */}
+        <div className="lg:col-span-5 relative w-full aspect-[4/5] sm:aspect-square lg:aspect-[4/5] rounded-[24px] overflow-hidden border border-white/5 group shadow-2xl bg-[#121113]">
+          {/* Glassmorphism Title Overlay */}
+          <div className="absolute top-6 left-6 z-20 px-4 py-2 rounded-full bg-[#080809]/60 backdrop-blur-md border border-white/5 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+            <span className="text-[10px] text-white uppercase tracking-[0.2em] font-medium">SK Studio Live</span>
+          </div>
+
+          {/* Video Container */}
+          <div className="absolute inset-0 w-full h-full bg-[#080809]">
+            <video
+              className="w-full h-full object-cover transition-transform duration-[2.5s] ease-out group-hover:scale-105"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src="/videos/hero.webm" type="video/webm" />
+              <source src="/videos/hero.mp4" type="video/mp4" />
+              {/* Fallback to high-res photo if video fails */}
+            </video>
+            {/* Absolute overlay tint */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#080809]/80 via-transparent to-transparent opacity-60 pointer-events-none" />
+          </div>
+
+          {/* Frame details for poster look */}
+          <div className="absolute bottom-6 left-6 z-20 text-left">
+            <p className="text-[10px] text-[#A1A1AA] uppercase tracking-[0.2em] mb-1 font-semibold">Záběr z našeho studia</p>
+            <p className="text-sm text-white font-medium tracking-wide uppercase" style={{ fontFamily: 'var(--font-heading)' }}>Brno, Novobranská</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Live Walk-In Dashboard Footer */}
+      <div className="mx-auto max-w-7xl w-full px-6 lg:px-12 z-10 mt-12 lg:mt-6 border-t border-white/5 pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          {/* Live Status */}
+          <div className="flex items-start gap-4">
+            <div className={`p-3 rounded-xl border ${salonStatus.isOpen ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-400' : 'bg-rose-500/5 border-rose-500/10 text-rose-400'}`}>
+              <div className="relative flex h-3 w-3">
+                {salonStatus.isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
+                <span className={`relative inline-flex rounded-full h-3 w-3 ${salonStatus.isOpen ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#A1A1AA]">Aktuální status</span>
+                <span className="text-[10px] text-white/50">{currentTime && `(Brno ${currentTime})`}</span>
+              </div>
+              <p className="text-base font-bold uppercase tracking-wider mt-1 text-white">
+                {salonStatus.text}
+              </p>
+            </div>
+          </div>
+
+          {/* Peak Hours Info */}
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 text-[#D4AF37]">
+              <Clock size={16} />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A1A1AA]">Tip pro návštěvu</span>
+              <p className="text-sm font-semibold tracking-wide text-white mt-1">
+                Největší provoz bývá 11–13 a po 16. hodině
+              </p>
+              <p className="text-[10px] text-[#A1A1AA] mt-0.5">
+                Neváhejte zavolat a zeptat se
+              </p>
+            </div>
+          </div>
+
+          {/* Google Ratings link */}
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-[#D4AF37]/5 border border-[#D4AF37]/10">
+              <svg className="w-4 h-4" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+            </div>
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-[#A1A1AA]">Google hodnocení</span>
+              <a
+                href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x471295b43d253b79:0x17392d6a377d37a2?sa=X&ved=1t:8290&ictx=111"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 mt-1 hover:text-[#D4AF37] transition-colors group"
+              >
+                <span className="text-sm font-bold text-white group-hover:text-[#D4AF37]">5.0/5 ★</span>
+                <span className="text-xs text-[#A1A1AA]">(125+ recenzí)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
