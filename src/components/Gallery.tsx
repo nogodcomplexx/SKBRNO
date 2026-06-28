@@ -35,16 +35,10 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function Gallery() {
-  const [activeCategory, setActiveCategory] = useState<'all' | 'hair' | 'atelier'>('all');
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const filteredImages = useMemo(() => {
-    if (activeCategory === 'all') return galleryImages;
-    if (activeCategory === 'hair') return galleryImages.filter(img => img.category === 'barber' || img.category === 'color');
-    if (activeCategory === 'atelier') return galleryImages.filter(img => img.category === 'atelier');
-    return galleryImages;
-  }, [activeCategory]);
+  const filteredImages = galleryImages;
 
   const visibleImages = useMemo(() => {
     return isExpanded ? filteredImages : filteredImages.slice(0, INITIAL_LIMIT);
@@ -101,31 +95,6 @@ export default function Gallery() {
           </FadeIn>
         </div>
 
-        {/* Category Filters */}
-        <FadeIn delay={0.2}>
-          <div className="flex justify-start md:justify-center gap-3 mb-10 overflow-x-auto scrollbar-hide">
-            {(['all', 'hair', 'atelier'] as const).map((category) => {
-              const label = category === 'all' ? 'Všechny' : category === 'hair' ? 'Vlasy & Styling' : 'Ateliér';
-              const isActive = activeCategory === category;
-              return (
-                <button
-                  key={category}
-                  onClick={() => {
-                    setActiveCategory(category);
-                    setIsExpanded(false); // Reset expansion on category change
-                  }}
-                  className={`px-6 py-2.5 rounded-full text-[10px] uppercase tracking-[0.2em] font-bold border transition-all duration-300 ${
-                    isActive
-                      ? 'bg-[#D4AF37] border-[#D4AF37] text-[#080809] font-bold'
-                      : 'bg-[#080809] border-white/5 text-[#A1A1AA] hover:text-white hover:border-white/10'
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </FadeIn>
 
         {/* Lookbook Asymmetric Grid Container */}
         <div className="relative">
