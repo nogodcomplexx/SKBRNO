@@ -68,12 +68,12 @@ export default function Pricing() {
 
         {/* Minimalist Lookbook Tab Selector */}
         <FadeIn delay={0.2}>
-          <div className="flex justify-start sm:justify-center border-b border-white/5 mb-16 max-w-md mx-auto overflow-x-auto scrollbar-hide">
+          <div className="flex justify-start sm:justify-center border-b border-white/5 mb-16 max-w-md mx-auto overflow-x-auto scrollbar-hide px-4 sm:px-0">
             {tabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className="relative py-4 px-4 sm:px-6 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-white/40 hover:text-white transition-colors duration-300 flex-1 text-center whitespace-nowrap"
+                className="relative py-4 px-4 sm:px-6 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-white/40 hover:text-white transition-colors duration-300 flex-none sm:flex-1 text-center whitespace-nowrap"
               >
                 {activeTab === tab && (
                   <motion.span
