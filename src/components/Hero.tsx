@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Star, Clock, MapPin, Sparkles } from 'lucide-react';
+import { ChevronDown, Star, Clock, MapPin, Sparkles, Scissors, Moon } from 'lucide-react';
 import SplitText from './animations/SplitText';
 import BlurText from './animations/BlurText';
 import FadeIn from './animations/FadeIn';
@@ -183,11 +183,43 @@ export default function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {/* Live Status */}
           <div className="flex items-start gap-4">
-            <div className={`p-3 rounded-xl border ${salonStatus.isOpen ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-400' : 'bg-rose-500/5 border-rose-500/10 text-rose-400'}`}>
-              <div className="relative flex h-3 w-3">
-                {salonStatus.isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
-                <span className={`relative inline-flex rounded-full h-3 w-3 ${salonStatus.isOpen ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-              </div>
+            <div className={`p-2.5 rounded-xl border transition-all duration-500 ${
+              salonStatus.isOpen 
+                ? 'bg-emerald-500/5 border-emerald-500/15 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.06)]' 
+                : 'bg-rose-500/5 border-rose-500/15 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.04)]'
+            }`}>
+              {salonStatus.isOpen ? (
+                <motion.div
+                  animate={{ 
+                    rotate: [0, -12, 8, -4, 0],
+                    scale: [1, 1.08, 0.96, 1.02, 1]
+                  }}
+                  transition={{ 
+                    duration: 1.8, 
+                    repeat: Infinity, 
+                    repeatDelay: 4,
+                    ease: "easeInOut"
+                  }}
+                  className="relative flex items-center justify-center filter drop-shadow-[0_0_8px_rgba(52,168,83,0.35)]"
+                >
+                  <Scissors size={15} className="rotate-[90deg]" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  animate={{ 
+                    opacity: [0.6, 1, 0.6],
+                    scale: [0.95, 1.05, 0.95]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut"
+                  }}
+                  className="relative flex items-center justify-center filter drop-shadow-[0_0_6px_rgba(244,63,94,0.3)]"
+                >
+                  <Moon size={15} />
+                </motion.div>
+              )}
             </div>
             <div>
               <div className="flex items-center gap-2">
