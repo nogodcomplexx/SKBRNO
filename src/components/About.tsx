@@ -110,27 +110,27 @@ export default function About() {
               </p>
             </FadeIn>
 
-            {/* Micro-Features grid */}
+             {/* Micro-Features grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/5">
               <FadeIn delay={0.4} className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <ScissorsAndComb size={16} />
+                <div className="flex items-center gap-3 text-[#D4AF37]">
+                  <ScissorsAndComb size={16} className="shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Preciznost</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Každý střih ladíme k dokonalosti podle anatomie vaší hlavy.</span>
               </FadeIn>
               
               <FadeIn delay={0.5} className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <StraightRazor size={16} />
+                <div className="flex items-center gap-3 text-[#D4AF37]">
+                  <StraightRazor size={16} className="shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Vášeň</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Sledujeme světové trendy, abychom přinesli to nejlepší.</span>
               </FadeIn>
 
               <FadeIn delay={0.6} className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-[#D4AF37]">
-                  <DropperBottle size={16} />
+                <div className="flex items-center gap-3 text-[#D4AF37]">
+                  <DropperBottle size={16} className="shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider text-white">Kvalita</span>
                 </div>
                 <span className="text-xs text-[#A1A1AA]">Používáme špičkovou kosmetiku pro zdravé a lesklé vlasy.</span>
