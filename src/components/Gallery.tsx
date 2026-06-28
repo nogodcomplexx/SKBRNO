@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Maximize2, Instagram, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import FadeIn from './animations/FadeIn';
@@ -37,12 +37,23 @@ const categoryLabels: Record<string, string> = {
 export default function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // Mobile phones (Tailwind sm breakpoint)
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const filteredImages = galleryImages;
 
   const visibleImages = useMemo(() => {
-    return isExpanded ? filteredImages : filteredImages.slice(0, INITIAL_LIMIT);
-  }, [isExpanded, filteredImages]);
+    const limit = isMobile ? 4 : INITIAL_LIMIT;
+    return isExpanded ? filteredImages : filteredImages.slice(0, limit);
+  }, [isExpanded, filteredImages, isMobile]);
 
   const openLightbox = (imgSrc: string) => {
     const idx = filteredImages.findIndex(img => img.src === imgSrc);
