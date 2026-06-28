@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "SK Kadeřnictví na Novobranské Brno",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "SK Kadeřnictví | Profesionální kadeřnictví v Brně",
     description:
       "Přijďte kdykoliv bez objednání. Profesionální střihy a barvení v srdci Brna.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
