@@ -48,6 +48,21 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+/* 2K / QHD Screens and Ultra-Wide (min 1920px) */
+@media (min-width: 1920px) {
+  html {
+    font-size: 18px; /* Scales layout and typography up by 12.5% */
+  }
+}
+
+/* 4K UHD Screens (min 2560px) */
+@media (min-width: 2560px) {
+  html {
+    font-size: 20px; /* Scales layout and typography up by 25% */
+  }
 }
 
 body {
