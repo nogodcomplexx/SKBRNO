@@ -139,7 +139,12 @@ export default function About() {
 
             {/* Awards Row */}
             <FadeIn delay={0.7} className="mt-8 pt-8 border-t border-white/5">
-              <span className="text-[10px] uppercase tracking-widest text-[#C5A880] font-bold block mb-3">PRESTIŽNÍ OCENĚNÍ</span>
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles size={11} className="text-[#D4AF37] animate-pulse shrink-0" />
+                <span className="text-[11px] uppercase tracking-[0.25em] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#C5A880] to-[#D4AF37]">
+                  Prestižní ocenění
+                </span>
+              </div>
               <p className="text-xs text-[#A1A1AA] leading-relaxed mb-5">
                 SK Kadeřnictví na Novobranské je trojnásobným oceněným laureátem celostátního hodnocení spokojenosti zákazníků{' '}
                 <a 
