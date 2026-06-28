@@ -27,12 +27,10 @@ export default function Loader() {
             transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
           }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#080809] overflow-hidden"
+          style={{
+            background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.035) 0%, rgba(212, 175, 55, 0) 70%), #080809'
+          }}
         >
-          {/* Subtle noise pattern overlay */}
-          <div className="absolute inset-0 bg-repeat opacity-[0.015] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")` }} />
-
-          {/* Background ambient gold glows */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-radial from-[#D4AF37]/5 to-transparent blur-[120px] pointer-events-none" />
           
           <div className="relative flex flex-col items-center justify-center">
             
@@ -71,7 +69,10 @@ export default function Loader() {
                   ease: "easeInOut"
                 } 
               }}
-              className="absolute w-32 h-32 rounded-full bg-radial from-[#D4AF37]/50 to-transparent blur-xl pointer-events-none"
+              className="absolute w-48 h-48 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0) 65%)'
+              }}
             />
 
             {/* 3D Y-Axis Rotating Gold Logo */}
