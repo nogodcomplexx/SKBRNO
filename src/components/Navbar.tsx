@@ -77,68 +77,86 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-[#080809]/80 backdrop-blur-xl border-b border-white/5 py-4'
-            : 'bg-transparent py-6'
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 flex items-center justify-between">
+      <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none flex justify-center px-4 sm:px-6">
+        <motion.div
+          layout
+          transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+          className={`pointer-events-auto flex items-center justify-between bg-[#080809]/60 backdrop-blur-xl border border-white/5 shadow-2xl transition-all duration-500 rounded-full ${
+            isScrolled
+              ? 'w-full max-w-[480px] px-5 py-2.5 border-[#D4AF37]/20 shadow-[0_10px_30px_rgba(212,175,55,0.06)]'
+              : 'w-full max-w-5xl px-6 py-4'
+          }`}
+        >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 z-50">
+          <a href="#" className="flex items-center gap-2.5 shrink-0">
             <div className="relative flex items-center gap-2 group">
-              <Logo size={40} className="transition-all duration-500 group-hover:scale-105" />
+              <Logo size={isScrolled ? 34 : 40} className="transition-all duration-500 group-hover:scale-105" />
               <div className="flex flex-col">
-                <span className="text-[#FAFAF9] text-xs font-bold tracking-[0.25em] uppercase leading-none" style={{ fontFamily: 'var(--font-heading)' }}>SK STUDIO</span>
-                <span className="text-[#A1A1AA] text-[9px] tracking-[0.1em] uppercase mt-0.5">Kadeřnictví Brno</span>
+                <span className="text-[#FAFAF9] text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase leading-none" style={{ fontFamily: 'var(--font-heading)' }}>SK STUDIO</span>
+                {!isScrolled && (
+                  <span className="text-[#A1A1AA] text-[9px] tracking-[0.1em] uppercase mt-0.5">Kadeřnictví Brno</span>
+                )}
               </div>
             </div>
           </a>
 
           {/* Desktop Nav */}
-          <div className={`hidden lg:flex items-center gap-2 transition-all duration-500 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            {navLinks.map((link) => (
+          <div className="hidden lg:flex items-center gap-1 overflow-hidden transition-all duration-500">
+            {!isScrolled && !isOpen && navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-xs text-[#A1A1AA] hover:text-[#FAFAF9] transition-colors duration-300 uppercase tracking-[0.2em] font-medium group"
+                className="relative px-3.5 py-2 text-[11px] text-[#A1A1AA] hover:text-[#FAFAF9] transition-colors duration-300 uppercase tracking-[0.2em] font-medium group whitespace-nowrap"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-4 right-4 h-[1px] bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
+                <span className="absolute bottom-0 left-3.5 right-3.5 h-[1px] bg-[#D4AF37] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
               </a>
             ))}
           </div>
 
           {/* CTA & Custom Hamburger */}
-          <div className="flex items-center gap-6">
-            <div className={`hidden md:block transition-all duration-500 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-              <Magnet strength={0.15}>
-                <a
-                  href="tel:+420770114540"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/10 hover:border-[#D4AF37] text-white rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] bg-white/[0.02]"
-                >
-                  <Phone size={12} className="mr-2 text-[#D4AF37]" />
-                  +420 770 114 540
-                </a>
-              </Magnet>
-            </div>
+          <div className="flex items-center gap-4 shrink-0">
+            {/* Phone Button */}
+            {!isOpen && (
+              <div className="transition-all duration-300">
+                {isScrolled ? (
+                  <Magnet strength={0.15}>
+                    <a
+                      href="tel:+420770114540"
+                      className="w-9 h-9 flex items-center justify-center border border-[#D4AF37]/25 hover:border-[#D4AF37] text-[#D4AF37] rounded-full bg-[#D4AF37]/5 transition-all duration-300 shadow-md hover:shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+                      aria-label="Zavolat"
+                    >
+                      <Phone size={13} />
+                    </a>
+                  </Magnet>
+                ) : (
+                  <div className="hidden sm:block">
+                    <Magnet strength={0.15}>
+                      <a
+                        href="tel:+420770114540"
+                        className="inline-flex items-center justify-center px-5 py-2.5 border border-white/10 hover:border-[#D4AF37] text-white rounded-full text-[10px] font-semibold uppercase tracking-widest transition-all duration-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] bg-white/[0.02]"
+                      >
+                        <Phone size={11} className="mr-2 text-[#D4AF37]" />
+                        +420 770 114 540
+                      </a>
+                    </Magnet>
+                  </div>
+                )}
+              </div>
+            )}
 
-            {/* Custom Premium Hamburger Button */}
+            {/* Custom Hamburger Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 focus:outline-none text-[#FAFAF9] hover:text-[#D4AF37] transition-colors"
+              className="relative z-50 flex h-9 w-9 flex-col items-center justify-center gap-1.5 focus:outline-none text-[#FAFAF9] hover:text-[#D4AF37] transition-colors border border-white/5 hover:border-[#D4AF37]/35 rounded-full bg-white/[0.01]"
               aria-label="Menu"
             >
-              <span className={`block h-[1px] w-6 bg-current transition-all duration-300 ${isOpen ? 'translate-y-[3.5px] rotate-45' : ''}`} />
-              <span className={`block h-[1px] w-6 bg-current transition-all duration-300 ${isOpen ? '-translate-y-[3.5px] -rotate-45' : ''}`} />
+              <span className="block h-[1px] bg-current transition-all duration-300" style={{ width: '18px', transform: isOpen ? 'translateY(3.5px) rotate(45deg)' : '' }} />
+              <span className="block h-[1px] bg-current transition-all duration-300" style={{ width: '18px', transform: isOpen ? 'translateY(-3.5px) rotate(-45deg)' : '' }} />
             </button>
           </div>
-        </div>
-      </motion.header>
+        </motion.div>
+      </header>
 
       {/* Full-Screen Premium Curtain Menu */}
       <AnimatePresence>
