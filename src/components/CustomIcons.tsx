@@ -43,14 +43,14 @@ export function ScissorsAndComb({ size = 24, ...props }: IconProps) {
       strokeLinejoin="round"
       {...props}
     >
-      {/* Comb */}
-      <path d="M3 6h18v3H3z" />
-      <path d="M6 9v4M9 9v4M12 9v4M15 9v4M18 9v4M21 9v4M3 9v4" />
-      {/* Scissors */}
-      <circle cx="6" cy="18" r="2" />
-      <circle cx="14" cy="18" r="2" />
-      <path d="M7.5 16.5L13 10M12.5 16.5L7 10" />
-      <path d="M13 10l5-6M7 10L2 4" />
+      {/* Comb (Left side) */}
+      <path d="M4 4v16" />
+      <path d="M4 6h4M4 8h4M4 10h4M4 12h4M4 14h4M4 16h4M4 18h4" />
+      {/* Scissors (Right side) */}
+      <circle cx="13" cy="17" r="2" />
+      <circle cx="19" cy="17" r="2" />
+      <path d="M14.5 15.5L16 12M17.5 15.5L16 12" />
+      <path d="M16 12L13 5M16 12L19 5" />
     </svg>
   );
 }
