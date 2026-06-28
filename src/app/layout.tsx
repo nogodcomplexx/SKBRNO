@@ -30,9 +30,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://skbrno.cz"
+  ),
   title: "SK Kadeřnictví | Profesionální kadeřnictví v Brně bez objednání",
   description:
-    "SK Kadeřnictví na Novobranské — profesionální střihy, barvení vlasů, Balayage, Ombré a Melír v srdci Brna. Přijďte kdykoliv bez objednání. 5.0 ★ hodnocení na Google.",
+    "SK Kadeřnictví na Novobranské — profesionální střihy, barvení vlasů, Balayage, Ombré a Melír v srdci Brna. Přijďte kdykoliv bez objednání. 4.9 ★ hodnocení na Google.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -55,17 +60,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SK Kadeřnictví | Profesionální kadeřnictví v Brně",
     description:
-      "Přijďte kdykoliv bez objednání. Profesionální střihy a barvení v srdci Brna. 5.0 ★ Google hodnocení.",
+      "Přijďte kdykoliv bez objednání. Profesionální střihy a barvení v srdci Brna. 4.9 ★ Google hodnocení.",
     url: "https://skbrno.cz",
     siteName: "SK Kadeřnictví",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "SK Kadeřnictví na Novobranské Brno",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "SK Kadeřnictví | Profesionální kadeřnictví v Brně",
     description:
       "Přijďte kdykoliv bez objednání. Profesionální střihy a barvení v srdci Brna.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
